@@ -13,7 +13,7 @@ source:
 build:
   number: 0
   script: python setup.py install --single-version-externally-managed --record=record.txt
-  noarch: python
+  skip: True  # [py<37]
 
 requirements:
   host:
@@ -29,10 +29,13 @@ test:
     - zict
 
 about:
-  home: http://github.com/mrocklin/zict
-  license: BSD 3-Clause
+  home: https://github.com/mrocklin/zict
+  license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE.txt
   summary: Composable Dictionary Classes
+  dev_url: https://github.com/dask/zict
+  doc_url: https://zict.readthedocs.io/en/latest/
 
 
 extra:
