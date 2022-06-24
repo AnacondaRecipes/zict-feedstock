@@ -19,6 +19,8 @@ requirements:
   host:
     - python
     - setuptools
+    - wheel
+    - pip
 
   run:
     - python
@@ -27,6 +29,10 @@ requirements:
 test:
   imports:
     - zict
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/mrocklin/zict
