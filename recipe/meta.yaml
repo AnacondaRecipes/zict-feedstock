@@ -25,14 +25,19 @@ requirements:
   run:
     - python
     - heapdict
+    - python-lmdb
 
 test:
   imports:
     - zict
+  source_files:
+    - zict/tests
   requires:
     - pip
+    - pytest
   commands:
     - pip check
+    - pytest
 
 about:
   home: https://github.com/mrocklin/zict
