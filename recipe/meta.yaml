@@ -38,7 +38,7 @@ test:
   commands:
     - pip check
     - pytest
-    - test_lmdb.py tests -vv -k "not (test_mapping or test_reuse or test_creates_dir)"
+    - test_lmdb.py tests -vv -k "not (test_mapping or test_reuse or test_creates_dir)"   #  [win]
 
 about:
   home: https://github.com/mrocklin/zict
