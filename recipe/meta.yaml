@@ -27,6 +27,11 @@ requirements:
     - heapdict
     - python-lmdb
 
+# Skipping unnecesssary tests below as a result of low disk space on for win-64 causing build failures.
+{% set tests_to_skip = "test_mapping" %}   #  [win]
+{% set tests_to_skip = "test_reuse" %}    #  [win]
+{% set tests_to_skip = "test_creates_dir" %}   #  [win]
+
 test:
   imports:
     - zict
@@ -38,7 +43,6 @@ test:
   commands:
     - pip check
     - pytest
-    - test_lmdb.py tests -vv -k "not (test_mapping or test_reuse or test_creates_dir)"   #  [win]
 
 about:
   home: https://github.com/mrocklin/zict
