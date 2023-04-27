@@ -39,6 +39,7 @@ test:
     - zict/tests
   requires:
     - pip
+    - pytest
     - pytest -k "not ({{ tests_to_skip }})"
   commands:
     - pip check
