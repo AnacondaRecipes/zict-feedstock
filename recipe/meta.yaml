@@ -42,8 +42,8 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest
-    - pytest -k "not ({{ tests_to_skip }})"
+    - pytest  # [not win]
+    - pytest zict/tests -k "not ({{ tests_to_skip }})"  # [win]
 
 about:
   home: https://github.com/mrocklin/zict
