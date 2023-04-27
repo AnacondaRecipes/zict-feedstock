@@ -40,10 +40,10 @@ test:
   requires:
     - pip
     - pytest
-    - pytest -k "not ({{ tests_to_skip }})"
   commands:
     - pip check
     - pytest
+    - pytest -k "not ({{ tests_to_skip }})"
 
 about:
   home: https://github.com/mrocklin/zict
