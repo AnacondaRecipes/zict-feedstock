@@ -1,4 +1,4 @@
-{% set version = "2.1.0" %}
+{% set version = "2.2.0" %}
 {% set name = "zict" %}
 
 package:
@@ -8,11 +8,11 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 15b2cc15f95a476fbe0623fd8f771e1e771310bf7a01f95412a0b605b6e47510
+  sha256: d7366c2e2293314112dcf2432108428a67b927b00005619feefc310d12d833f3
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: True  # [py<37]
 
 requirements:
@@ -25,20 +25,33 @@ requirements:
   run:
     - python
     - heapdict
+    - python-lmdb
+
+# Skipping unnecesssary tests below as a result of low disk space on for win-64 causing build failures.
+{% set tests_to_skip = "test_mapping" %}   #  [win]
+{% set tests_to_skip = tests_to_skip + " or test_reuse" %}    #  [win]
+{% set tests_to_skip = tests_to_skip + " or test_creates_dir" %}   #  [win]
 
 test:
   imports:
     - zict
+  source_files:
+    - zict/tests
   requires:
     - pip
+    - pytest
   commands:
     - pip check
+    - pytest  # [not win]
+    - pytest zict/tests -k "not ({{ tests_to_skip }})"  # [win]
 
 about:
   home: https://github.com/mrocklin/zict
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
+  description: |
+    Mutable Mapping tools.
   summary: Composable Dictionary Classes
   dev_url: https://github.com/dask/zict
   doc_url: https://zict.readthedocs.io/en/latest/
