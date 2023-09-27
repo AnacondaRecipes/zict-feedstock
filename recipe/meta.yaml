@@ -1,4 +1,4 @@
-{% set version = "2.2.0" %}
+{% set version = "3.0.0" %}
 {% set name = "zict" %}
 
 package:
@@ -8,12 +8,12 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d7366c2e2293314112dcf2432108428a67b927b00005619feefc310d12d833f3
+  sha256: e321e263b6a97aafc0790c3cfb3c04656b7066e6738c37fffcca95d803c9fba5
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<37]
+  skip: True  # [py<38]
 
 requirements:
   host:
