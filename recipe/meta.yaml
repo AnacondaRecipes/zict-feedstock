@@ -44,8 +44,8 @@ test:
   commands:
     - pip check
     - pytest  # [not win]
-    - pytest zict/tests -k "not ({{ tests_to_skip }})"  # [win or py<314]
-    - pytest zict/tests -k "not ({{ tests_to_skip }})" --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py  # [win or py==314]
+    - pytest zict/tests -k "not ({{ tests_to_skip }})"  # [win and py<314]
+    - pytest zict/tests -k "not ({{ tests_to_skip }})" --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py  # [win and py==314]
 
 about:
   home: https://github.com/mrocklin/zict
