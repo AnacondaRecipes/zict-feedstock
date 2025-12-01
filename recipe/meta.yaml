@@ -42,8 +42,8 @@ test:
     - pytest-asyncio
   commands:
     - pip check
-    - pytest  # [not win]
-    - pytest zict/tests --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py -k "not ({{ tests_to_skip }})"  # [win]
+    - pytest -v --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py  # [not win]
+    - pytest zict/tests -v --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py -k "not ({{ tests_to_skip }})"  # [win]
 
 about:
   home: https://github.com/mrocklin/zict
