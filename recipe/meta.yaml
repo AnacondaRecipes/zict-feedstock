@@ -6,14 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: e321e263b6a97aafc0790c3cfb3c04656b7066e6738c37fffcca95d803c9fba5
 
 build:
-  number: 0
+  number: 1
+  skip: true  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<38]
 
 requirements:
   host:
@@ -21,7 +20,6 @@ requirements:
     - setuptools
     - wheel
     - pip
-
   run:
     - python
     - heapdict
@@ -40,10 +38,12 @@ test:
   requires:
     - pip
     - pytest
+    # for tests/test_async_buffer.py
+    - pytest-asyncio
   commands:
     - pip check
-    - pytest  # [not win]
-    - pytest zict/tests -k "not ({{ tests_to_skip }})"  # [win]
+    - pytest -v --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py  # [not win]
+    - pytest zict/tests -v --ignore=zict/tests/test_lmdb.py --ignore=zict/tests/test_lru.py -k "not ({{ tests_to_skip }})"  # [win]
 
 about:
   home: https://github.com/mrocklin/zict
@@ -54,8 +54,7 @@ about:
     Mutable Mapping tools.
   summary: Composable Dictionary Classes
   dev_url: https://github.com/dask/zict
-  doc_url: https://zict.readthedocs.io/en/latest/
-
+  doc_url: https://zict.readthedocs.io
 
 extra:
   recipe-maintainers:
