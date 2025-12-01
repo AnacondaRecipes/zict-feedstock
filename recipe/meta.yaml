@@ -39,7 +39,7 @@ test:
     - pip
     - pytest
     # for tests/test_async_buffer.py
-    - pytest-tornasync
+    - pytest-asyncio
   commands:
     - pip check
     - pytest  # [not win]
