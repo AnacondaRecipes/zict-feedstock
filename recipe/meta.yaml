@@ -54,7 +54,7 @@ about:
     Mutable Mapping tools.
   summary: Composable Dictionary Classes
   dev_url: https://github.com/dask/zict
-  doc_url: https://zict.readthedocs.io/
+  doc_url: https://zict.readthedocs.io
 
 extra:
   recipe-maintainers:
